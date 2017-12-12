@@ -25,7 +25,6 @@ class Home extends Base {
             sCallback:function(res){
                 callback && callback(res);
             }
-
         }
         this.request(params);
     }
@@ -37,7 +36,6 @@ class Home extends Base {
             sCallback: function (res) {
                 callback && callback(res);
             }
-
         }
         this.request(params);
     }

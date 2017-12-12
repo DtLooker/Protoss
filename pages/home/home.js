@@ -20,17 +20,17 @@ Page({
     _loadData:function () {
         var id = 1;
         //加载banner轮播图
-        home.getBannerData(id, this.callBackBanner);
+        home.getBannerData(id, this.callbackBanner);
 
         //加载主题专题栏
-        home.getThemeData(this.callBackTheme);
+        home.getThemeData(this.callbackTheme);
 
         //加载最近新品专题栏
-        home.getProductsData(this.callBackProducts)
+        home.getProductsData(this.callbackProducts)
         
     },
 
-    callBackBanner:function(res){
+    callbackBanner:function(res){
         //console.log(res);
         this.setData({
             'bannerArr':res
@@ -38,30 +38,31 @@ Page({
     },
 
 
-    callBackTheme:function(res){
+    callbackTheme:function(res){
         //console.log(res);
         this.setData({
             'themeArr':res
         })
     },
 
-    callBackProducts:function(res){
+    callbackProducts:function(res){
         this.setData({
             'productsArr':res
         });
     },
-    
+
 
     onProductsItemTap:function(event){      
         var id = home.getDataSet(event, 'id');
         //console.log(id);
         wx.navigateTo({
-
             url: '../product/product?id=' + id,
         })  
     },
 
-    onThemesItemTap:function(event){
+
+    
+    onThemeItemTap:function(event){
         var id = home.getDataSet(event, 'id');
         var name = home.getDataSet(event, 'name');
         wx.navigateTo({
