@@ -1,0 +1,16 @@
+{
+    "pages": [
+        "pages/home/home",
+        "pages/product/product",
+        "pages/theme/theme"
+    ],
+
+    "window": {
+      "navigationBarBackgroundColor": "#AB956D",
+      "navigationBarTextStyle": "#ffffff",
+      "navigationBarTitleText": "小程序",
+      "backgroundColor": "#eeeeee",
+      "backgroundTextStyle": "light",
+      "enablePullDownRefresh": false
+    }
+}
