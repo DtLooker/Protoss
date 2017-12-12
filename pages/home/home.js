@@ -31,7 +31,6 @@ Page({
     },
 
     callbackBanner:function(res){
-        //console.log(res);
         this.setData({
             'bannerArr':res
         });
