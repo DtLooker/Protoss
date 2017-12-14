@@ -7,7 +7,7 @@ class Category extends Base{
 
     /* 获得所有分类 */
     getCategoryType(callback){
-        var parmas = {
+        var params = {
             url: 'category/all',
             sCallback: function(data){
                 callback && callback(data);
@@ -17,15 +17,15 @@ class Category extends Base{
     }
 
     /* 获得某种分类的商品 */
-    // getProductsByCategory(id, callback){
-    //     var params = {
-    //         url: 'product/by_category?id=' + id,
-    //         sCallback: function(data){
-    //             callback && callback(data);
-    //         }
-    //     };
-    //     this.request(params);
-    // }
+    getProductsByCategory(id, callback){
+        var params = {
+            url: 'product/by_category?id=' + id,
+            sCallback: function(data){
+                callback && callback(data);
+            }
+        };
+        this.request(params);
+    }
 }
 
 export {Category};
