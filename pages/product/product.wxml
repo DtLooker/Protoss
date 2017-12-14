@@ -17,7 +17,7 @@
         <view class='cart-box'>
             <view class='product-counts'>
                 <picker class="{{product.stock==0?'disabled':''}}" range='{{countsArray}}' bindchange='bindPickerChange'>
-                    <!-- flex 对picker支持不太好，需要在外面再包裹一个view -->
+                    <!-- flex 对 picker 支持不太好，需要在外面再包裹一个view -->
                     <view>
                         <text class="counts-tips">数量</text>
                         <text class='count-data'>{{productCount}}</text>
@@ -43,11 +43,32 @@
 
     <view class='detail-bottom-box'>
         <view class='tabs-box'>
-            <block wx:for="{{['商品详情','产品参数','售后保障']}}">
-                <view class='tabs-item' bindtap='onTabsItemTap' data-index='{{index}}'>
+            <block wx:for="{{productsDetail}}">
+                <view class="tabs-item {{currentTabsIndex==index?'selected':''}}" bindtap='onTabsItemTap' data-index='{{index}}'>
                     {{item}}
                 </view>
             </block>
+        </view>
+
+        <view class='product-detail-box'>
+            <view class='product-detail-imgs' hidden='{{currentTabsIndex != 0}}'>
+                <block wx:for="{{product.imgs}}">
+                    <image src='{{item.img_url.url}}' mode='aspectFill'></image>
+                </block>
+            </view>
+
+            <view class='product-detail-properties' hidden='{{currentTabsIndex != 1}}'>
+                <block wx:for="{{product.properties}}">
+                    <view class='properties-item'>
+                        <view class='properties-name'>{{item.name}}</view>
+                         <view class='properties-name'>{{item.detail}}</view>
+                    </view>
+                </block>
+            </view>
+
+            <view class='product-detail-protect' hidden='{{currentTabsIndex != 2}}'>
+                <view>七天无理由退货</view>
+            </view>
         </view>
     </view>
 
