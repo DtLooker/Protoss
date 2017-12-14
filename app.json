@@ -29,7 +29,7 @@
                 "selectedIconPath": "imgs/toolbar/category@selected.png"
             },
             {
-                "pagePath": "pages/home/home",
+                "pagePath": "pages/cart/cart",
                 "text": "购物车",
                 "iconPath": "imgs/toolbar/cart.png",
                 "selectedIconPath": "imgs/toolbar/cart@selected.png"
