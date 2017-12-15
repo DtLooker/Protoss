@@ -36,6 +36,7 @@ Page({
 
     editAddress: function (event) {
         var that = this;
+    
         wx.chooseAddress({
             success: function (res) {
                 console.log(res);
