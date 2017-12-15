@@ -74,5 +74,13 @@ Page({
             }
         }
         cart.add(tempObj, this.data.productCount);
+    },
+
+    onCartTap:function(event){
+        console.log('jump');
+        //跳转到tab栏，必须要用这个
+        wx.switchTab({
+            url: '/pages/cart/cart',
+        })
     }
 })

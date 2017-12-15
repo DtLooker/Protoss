@@ -20,6 +20,12 @@ Page({
 
     },
 
+    //离开页面的时候对用户所做操作进行统一保存
+    onHide:function(options){
+        //没有此处理，用户操作后，离开此页面选择，操作数据不会被保存   
+        cart.execSetStorageSync(this.data.cartData)
+    },
+
     /**
      * 生命周期函数--监听页面显示
      */
@@ -50,6 +56,7 @@ Page({
         for (let i = 0; i < len; i++) {
             //避免js中 0.05+0.01 = 0.060 000 000 000 000 005的问题 乘以100*100
             if (data[i].selectStatus) {
+                //Number() 把对象的值转换为数字
                 account += data[i].counts * multiple * Number(data[i].price) * multiple;
                 selectedCounts += data[i].counts;
                 selectedTypeCounts++;
@@ -108,6 +115,37 @@ Page({
                 return i;
             }
         }
+    },
+
+    /**
+     * 更改商品
+     */
+    changeCounts: function (event) {
+      
+        var id = cart.getDataSet(event, 'id'),
+            type = cart.getDataSet(event, 'type'),
+            index = this._getProductIndexById(id),
+            counts = 1;
+
+        if(type == 'add'){
+            cart.addCounts(id);
+        }else{
+            counts = -1;
+            cart.cutCounts(id);
+        }
+        this.data.cartData[index].counts += counts;
+        this._resetCartData();
+    },
+
+    delete:function(event){
+        var id = cart.getDataSet(event, 'id'),
+            index = this._getProductIndexById(id);
+        //删除某一项商品
+        this.data.cartData.splice(index, 1);splice()//splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+
+            this._resetCartData();
+            cart.delete(id);
     }
+
 
 })
