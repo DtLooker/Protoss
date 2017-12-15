@@ -42,6 +42,9 @@ Page({
         });
     },
 
+    /**
+     * 计算总金额和选择的商品总数
+     */
     _calcTotalAccountAndCounts: function (data) {
         var len = data.length;
         //所需要计算的总价格，需要排除未选中商品
@@ -145,6 +148,12 @@ Page({
 
             this._resetCartData();
             cart.delete(id);
+    },
+
+    submitOrder:function(event){
+        wx.navigateTo({
+            url: '../order/order?account=' + this.data.account + '&from=cart',
+        })
     }
 
 
