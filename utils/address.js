@@ -11,7 +11,7 @@ class Address extends Base {
         //前面地址部分是微信的收货地址，后面部分是服务器的
         var province = res.provinceName || res.city,
             city = res.cityName || res.city,
-            country = res.countryName || res.country,
+            country = res.countyName || res.country,
             detail = res.detailInfo || res.detail;
 
         var totalDetail = city + country + detail;
@@ -20,6 +20,21 @@ class Address extends Base {
             totalDetail = province + totalDetail;
         }
         return totalDetail;
+    }
+
+    //获得我自己的收货地址
+    getAddress(callback){
+        var that = this;
+        var param = {
+            url: 'address',
+            sCallback: function(res){
+                if(res){
+                    res.totalDetail = that.setAddressInfo(res);
+                    callback && callback(res);
+                }
+            }
+        };
+        this.request(param);
     }
 
     //判断是否为直辖市
@@ -52,7 +67,7 @@ class Address extends Base {
             name: res.userName,
             province: res.provinceName,
             city: res.cityName,
-            country: res.countryName,
+            country: res.countyName,
             mobile: res.telNumber,
             detail: res.detailInfo
         };

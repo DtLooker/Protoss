@@ -1,18 +1,21 @@
 
 import {Config} from 'config.js';
+import {Token} from 'token.js';
 
 class Base {
     constructor(){
         this.baseRequestUrl = Config.restUrl;  
     }
 
-    request(params){
+    //当noRefetch为true时，不做未授权重试机制
+    request(params, noRefetch){
+        var that = this;
         var url = this.baseRequestUrl + params.url;
         if(!params.type){
             params.type = 'GET';
         }
 
-        wx.request({
+        wx.request({          
             url: url,
             data: params.data,
             method: params.type,
@@ -22,12 +25,33 @@ class Base {
             },
   
             success: function(res) {
-                params.sCallback && params.sCallback(res.data);
+                var code = res.statusCode.toString();
+                var startChar = code.charAt(0);
+
+                if(startChar == '2'){
+                    params.sCallback && params.sCallback(res.data);
+                }else{
+                    if(code == '401'){
+                        if(!noRefetch){
+                            that._refetch(params)
+                        }      
+                    }
+                    if(noRefetch){
+                        params.eCallback && params.eCallback(res.data);
+                    }
+                }
             },
             fail: function(res) {
                 console.log(res);
             },
         })
+    }
+
+    _refetch(params){
+        var token = new Token();
+        token.getTokenFromServer((token) => {
+            this.request(params, true);
+        });
     }
 
     /* 获取元素上的绑定的值 */

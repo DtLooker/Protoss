@@ -5,7 +5,9 @@
         "pages/theme/theme",
         "pages/category/category",
         "pages/cart/cart",
-        "pages/order/order"
+        "pages/order/order",
+        "pages/pay-result/pay-result",
+        "pages/my/my"
     ],
     "window": {
         "navigationBarBackgroundColor": "#AB956D",
@@ -36,7 +38,7 @@
                 "selectedIconPath": "imgs/toolbar/cart@selected.png"
             },
             {
-                "pagePath": "pages/home/home",
+                "pagePath": "pages/my/my",
                 "text": "我的",
                 "iconPath": "imgs/toolbar/my.png",
                 "selectedIconPath": "imgs/toolbar/my@selected.png"
